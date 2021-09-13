@@ -15,7 +15,7 @@ pipeline {
             
     stage('Test') {
       steps {
-        sh 'node test'
+        sh 'ng test'
      }
     }
   }
