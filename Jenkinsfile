@@ -10,7 +10,11 @@ pipeline {
         sh 'npm install'
       }
     }  
-    
+    stage('Lint') {
+      steps {
+        sh 'Npm run lint'
+     }
+    }
             
     stage('Test') {
       steps {
