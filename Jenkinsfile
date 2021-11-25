@@ -5,7 +5,6 @@ pipeline {
 		stage('Build') {
 			steps {
 				sh 'npm install'
-        sleep 30
 			}
 		}
 //		stage('Lint') {
@@ -17,6 +16,7 @@ pipeline {
 		stage('Test') {
 			steps {
 				sh 'npm run test:ci'
+         sleep 15
 			}
 		}
 	}
