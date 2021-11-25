@@ -1,6 +1,7 @@
 pipeline {
 //  agent any  
- agent label 'dev_lab_2'
+  agent {
+          label 'dev_lab_2'
   stages {
 		stage('Build') {
 			steps {
@@ -19,4 +20,5 @@ pipeline {
 			}
 		}
 	}
-}
+  }
+  }
