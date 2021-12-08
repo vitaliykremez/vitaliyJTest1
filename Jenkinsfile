@@ -4,8 +4,7 @@ pipeline {
   stages {
 		stage('Build') {
 			steps {
-				sh 'npm install'
-        sh 'ng build'
+				sh 'npm install || ng build'
 			}
 		}
 //		stage('Lint') {
