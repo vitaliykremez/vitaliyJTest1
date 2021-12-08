@@ -4,7 +4,7 @@ pipeline {
   stages {
 		stage('Build') {
 			steps {
-				sh 'npm install || ls'
+        sh 'npm install || ls || pwd'
 			}
 		}
 //		stage('Lint') {
