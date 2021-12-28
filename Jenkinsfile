@@ -17,6 +17,7 @@ pipeline {
 			steps {
 				sh 'npm run test:ci'
          sleep 15
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [[$class: 'PreBuildMerge', options: [mergeTarget: 'master']]], userRemoteConfigs: [[credentialsId: 'j14', url: 'https://github.com/vitaliykremez/vitaliyJTest1.git']]])
 			}
 		}
 	}
