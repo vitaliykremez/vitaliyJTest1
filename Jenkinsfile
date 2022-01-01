@@ -25,15 +25,28 @@ pipeline {
 			steps {
 				sh 'npm run test:ci'
          sleep 15
-  checkout(
-         [$class: 'GitSCM', 
-         branches: [[name: '*/master']], 
-          extensions: [[$class: 'PreBuildMerge', 
-          options: [mergeStrategy: 'RECURSIVE_THEIRS', 
-                    mergeTarget: 'master']]], 
-         userRemoteConfigs: [[credentialsId: 'j14', url: 'https://github.com/vitaliykremez/vitaliyJTest1.git']]]
-  )
+ 
 			}
 		}
+stage('Build') {
+			steps {
+				sh '''
+                                   npm run build
+                                   pwd
+                                   ls -la "dist/TestProjectJenkins/"
+                                   ls -la "/var/www/TestProjectJenkins/"
+                                '''
+			}
+		}
+    
+    stage('deploy') {
+			steps {
+				sh '''
+                                cp -R dist/TestProjectJenkins/* "/var/www/TestProjectJenkins/"
+                                ls -la "/var/www/TestProjectJenkins/"
+                                '''
+			}
+		}
+
 	}
 }
