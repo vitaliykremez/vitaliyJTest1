@@ -40,6 +40,7 @@ pipeline {
 		}
     
     stage('deploy') {
+      when { branch 'master' }
 			steps {
 				sh '''
                                 cp -R dist/TestProjectJenkins/* "/var/www/TestProjectJenkins/"
