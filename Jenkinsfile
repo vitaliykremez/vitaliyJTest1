@@ -10,7 +10,7 @@ pipeline {
  //  )
   agent {label 'dev_lab_2'}
   stages {
-		stage('Build') {
+		stage('install') {
 			steps {
         sh 'npm install || ls || pwd'
 			}
@@ -28,11 +28,11 @@ pipeline {
  
 			}
 		}
-stage('Build') {
+                stage('Build') {
 			steps {
 				sh '''
                                    npm run build
-                                   pwd
+                                   pwd && ls -l
                                    ls -la "dist/TestProjectJenkins/"
                                    ls -la "/var/www/TestProjectJenkins/"
                                 '''
