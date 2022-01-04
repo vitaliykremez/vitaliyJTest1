@@ -9,8 +9,7 @@ pipeline {
 //          userRemoteConfigs: [[credentialsId: 'j14', url: 'https://github.com/vitaliykremez/vitaliyJTest1.git']]]
 //  )
 triggers {
-  when { branch 'master' }
-  cron 'H/10 * * * *'
+  githubBranches cancelQueued: true, events: [<object of type com.github.kostyasha.github.integration.branch.events.impl.GitHubBranchRestrictionFilter>], preStatus: true, spec: 'H/10 * * * *', triggerMode: 'CRON'
 }
   agent {label 'dev_lab_2'}
   stages {
