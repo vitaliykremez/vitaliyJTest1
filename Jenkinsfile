@@ -9,7 +9,7 @@ pipeline {
 //          userRemoteConfigs: [[credentialsId: 'j14', url: 'https://github.com/vitaliykremez/vitaliyJTest1.git']]]
 //  )
 triggers {
-  cron (BRANCH_NAME == "master" ? 'H/5 * * * *')
+  cron (BRANCH_NAME == "master" ? "H/5 * * * *" : "")
 }
   agent {label 'dev_lab_2'}
   stages {
