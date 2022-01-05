@@ -39,6 +39,7 @@ triggers {
           ls -la "dist/TestProjectJenkins/"
           ls -la "/var/www/TestProjectJenkins/"
         '''
+        archiveArtifacts artifacts: '*', followSymlinks: false, onlyIfSuccessful: true
 			}
 		}
 
