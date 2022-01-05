@@ -40,7 +40,8 @@ pipeline {
           ls -la "/var/www/TestProjectJenkins/"
         '''
         archiveArtifacts artifacts: 'dist/TestProjectJenkins/*', followSymlinks: false, onlyIfSuccessful: true
-			}
+          chuckNorris()
+      }
 		}
 
     stage('deploy') {
@@ -53,5 +54,4 @@ pipeline {
 			}
 		}
 	}
-  chuckNorris()
 }
