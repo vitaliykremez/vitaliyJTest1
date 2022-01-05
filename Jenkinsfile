@@ -11,9 +11,6 @@ pipeline {
   triggers {
     cron (BRANCH_NAME == "master" ? "0 2 * * *" : "")
   }
-  withChecks(name: 'injected name') {
-    // some other steps that will extract the name
-  }
   agent {label 'dev_lab_2'}
   stages {
 		stage('install') {
