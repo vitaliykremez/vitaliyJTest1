@@ -8,9 +8,9 @@ pipeline {
 //                   mergeTarget: 'master']]],
 //          userRemoteConfigs: [[credentialsId: 'j14', url: 'https://github.com/vitaliykremez/vitaliyJTest1.git']]]
 //  )
-triggers {
-  cron (BRANCH_NAME == "master" ? "0 2 * * *" : "")
-}
+  triggers {
+    cron (BRANCH_NAME == "master" ? "0 2 * * *" : "")
+  }
   agent {label 'dev_lab_2'}
   stages {
 		stage('install') {
@@ -31,7 +31,7 @@ triggers {
 
 			}
 		}
-                stage('Build') {
+    stage('Build') {
 			steps {
 				sh '''
           npm run build
@@ -39,7 +39,9 @@ triggers {
           ls -la "dist/TestProjectJenkins/"
           ls -la "/var/www/TestProjectJenkins/"
         '''
-			}
+        archiveArtifacts artifacts: 'dist/TestProjectJenkins/*', followSymlinks: false, onlyIfSuccessful: true
+          chuckNorris()
+      }
 		}
 
     stage('deploy') {
@@ -51,6 +53,5 @@ triggers {
         '''
 			}
 		}
-
 	}
 }
