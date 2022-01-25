@@ -50,7 +50,7 @@ pipeline {
 				sh '''
           rm -rf  dist
           rm -rf node_modules
-          docker build -t testAngular:vitaliy-$build_id .
+          docker build -t testAngular:vitaliytest1 .
         '''
 			}
 		}
