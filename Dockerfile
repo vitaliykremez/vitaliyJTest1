@@ -1,4 +1,4 @@
-FROM node:14.18.0-pnpm-yarn
+FROM node:14
 
 # создание директории приложения
 WORKDIR /usr/src/app
