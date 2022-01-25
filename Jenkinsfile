@@ -45,14 +45,15 @@ pipeline {
 		}
 
     stage('deploy') {
-      when { branch 'master' }
+//      when { branch 'master' }
 			steps {
 				sh '''
-          cp -R dist/TestProjectJenkins/* "/var/www/TestProjectJenkins/"
-          ls -la "/var/www/TestProjectJenkins/"
+          rm -rf  dist
+          rm -rf node_modules
+          docker build -t testAngular:vitaliy-$build_id .
         '''
 			}
 		}
-    
+
 	}
 }
