@@ -41,7 +41,7 @@ pipeline {
 				sh '''
           rm -rf  dist
           rm -rf node_modules
-          docker build -t testangular:v-$build_id .
+          docker build -t testangular:v-${env.BUILD_ID} .
         '''
 			}
 		}
