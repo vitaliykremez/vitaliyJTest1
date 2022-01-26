@@ -1,6 +1,6 @@
 pipeline {
 //  agent any
-properties ([disableConcurrentBuilds()])
+options ([disableConcurrentBuilds()])
   triggers {
     cron (BRANCH_NAME == "master" ? "0 2 * * *" : "")
   }
