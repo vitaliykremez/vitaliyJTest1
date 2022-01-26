@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:14 as build-stage
 
 # создание директории приложения
 WORKDIR /usr/src/app
@@ -16,4 +16,8 @@ RUN npm install
 COPY . .
 
 #EXPOSE 8080
-CMD npm run build
+RUN npm run build
+
+FROM nginx
+COPY ./nginx/myconf.conf /etc/nginx/conf.d/default.conf
+COPY --from=build-stage /usr/src/app/dist/TestProjectJenkins /usr/share/nginx/html
