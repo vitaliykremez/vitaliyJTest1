@@ -15,5 +15,5 @@ RUN npm install
 # копируем исходный код
 COPY . .
 
-EXPOSE 8080
-CMD [ "node", "package.json" ]
+#EXPOSE 8080
+CMD [ npm run build ]

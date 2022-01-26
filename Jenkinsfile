@@ -1,13 +1,6 @@
 pipeline {
 //  agent any
-//  checkout(
-//         [$class: 'GitSCM',
-//         branches: [[name: '*/master']],
-//         extensions: [[$class: 'PreBuildMerge',
-//         options: [mergeStrategy: 'RECURSIVE_THEIRS',
-//                   mergeTarget: 'master']]],
-//          userRemoteConfigs: [[credentialsId: 'j14', url: 'https://github.com/vitaliykremez/vitaliyJTest1.git']]]
-//  )
+properties ([disableConcurrentBuilds()])
   triggers {
     cron (BRANCH_NAME == "master" ? "0 2 * * *" : "")
   }
@@ -27,8 +20,7 @@ pipeline {
 		stage('Test') {
 			steps {
 				sh 'npm run test:ci'
-         sleep 15
-
+//         sleep 15
 			}
 		}
     stage('Build') {
@@ -39,8 +31,8 @@ pipeline {
           ls -la "dist/TestProjectJenkins/"
           ls -la "/var/www/TestProjectJenkins/"
         '''
-        archiveArtifacts artifacts: 'dist/TestProjectJenkins/*', followSymlinks: false, onlyIfSuccessful: true
-          chuckNorris()
+//        archiveArtifacts artifacts: 'dist/TestProjectJenkins/*', followSymlinks: false, onlyIfSuccessful: true
+        chuckNorris()
       }
 		}
 
@@ -50,7 +42,7 @@ pipeline {
 				sh '''
           rm -rf  dist
           rm -rf node_modules
-          docker build -t testangular:vitaliytest1 .
+          docker build -t testangular:v-$build_id .
         '''
 			}
 		}
