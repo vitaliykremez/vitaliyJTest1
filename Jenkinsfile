@@ -27,7 +27,9 @@ pipeline {
     }
 
     stages {
-//        stage('Build & Test') {}
+        stage('Build & Test') {
+          sh 'ls -l || pwd'
+        }
 
 //        stage('Build Docker Image') {}
 
