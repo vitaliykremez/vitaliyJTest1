@@ -13,6 +13,7 @@ pipeline {
 //    tools {}
 
     environment {
+      AWS_ECR_URL= '216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular'
 //      POM_VERSION = getVersion()
 //      JAR_NAME = getJarName()
       AWS_ECR_REGION = 'eu-central-1'
@@ -29,11 +30,19 @@ pipeline {
     stages {
         stage('Build & Test') {
           steps {
-            sh ' ls -l || pwd'
+            sh ' ls -l '
     			}
         }
 
-//        stage('Build Docker Image') {}
+        stage('Build Docker Image') {
+          steps {
+            script {
+              sh '''
+                docker build -t ${AWS_ECR_URL}:${BUILD_ID} .
+                 '''
+            }
+          }
+        }
 
 //        stage('Push Image to ECR') {}
 
