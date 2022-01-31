@@ -26,7 +26,7 @@ pipeline {
 //      AWS_ECS_TASK_DEFINITION_PATH = './ecs/container-definition-update-image.json'
     }
 
-    stages {
+/*    stages {
         stage('Build & Test') {}
 
         stage('Build Docker Image') {}
@@ -35,6 +35,6 @@ pipeline {
 
         stage('Deploy in ECS') {}
     }
-
+*/
     post {}
 }
