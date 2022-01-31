@@ -10,7 +10,7 @@ pipeline {
       timestamps()
     }
 
-    tools {}
+//    tools {}
 
     environment {
 //      POM_VERSION = getVersion()
@@ -36,5 +36,5 @@ pipeline {
         stage('Deploy in ECS') {}
     }
 */
-    post {}
+//    post {}
 }
