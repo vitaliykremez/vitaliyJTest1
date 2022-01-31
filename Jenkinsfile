@@ -44,7 +44,13 @@ pipeline {
           }
         }
 
-//        stage('Push Image to ECR') {}
+        stage('Push Image to ECR') {
+          steps {
+            sh '''
+              docker push ${AWS_ECR_URL}:${BUILD_ID}
+               '''
+          }
+        }
 
 //        stage('Deploy in ECS') {}
     }
