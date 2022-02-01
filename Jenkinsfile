@@ -22,6 +22,7 @@ pipeline {
       AWS_ECS_SERVICE = 'vk-fagate-service'
       AWS_ECS_TASK_DEFINITION = 'vk-v2'
       AWS_ECS_COMPATIBILITY = 'FARGATE'
+      AWS_ECS_EXECUTION_ROL = 'ecsTaskExecutionRole'
       AWS_ECS_NETWORK_MODE = 'awsvpc'
       AWS_ECS_CPU = '256'
       AWS_ECS_MEMORY = '512'
