@@ -13,10 +13,12 @@ pipeline {
 //    tools {}
 
     environment {
-      AWS_ECR_URL= '216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular'
+      AWS_ECR_URL_REG= '216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular'
+      AWS_ECR_URL= '216920179355.dkr.ecr.eu-central-1.amazonaws.com'
+      AWS_ECR_REGION = 'eu-central-1'
+      THE_BUTLER_SAYS_SO=credentials('jenkins-aws-beanstalk')
 //      POM_VERSION = getVersion()
 //      JAR_NAME = getJarName()
-      AWS_ECR_REGION = 'eu-central-1'
 //      AWS_ECS_SERVICE = 'ch-dev-user-api-service'
 //      AWS_ECS_TASK_DEFINITION = 'ch-dev-user-api-taskdefinition'
 //      AWS_ECS_COMPATIBILITY = 'FARGATE'
@@ -38,7 +40,7 @@ pipeline {
           steps {
             script {
               sh '''
-                docker build -t ${AWS_ECR_URL}:${BUILD_ID} .
+                docker build -t ${AWS_ECR_URL_REG}:${BUILD_ID} .
                  '''
             }
           }
@@ -47,7 +49,8 @@ pipeline {
         stage('Push Image to ECR') {
           steps {
             sh '''
-              docker push ${AWS_ECR_URL}:${BUILD_ID}
+              aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_ECR_URL}
+              docker push ${AWS_ECR_URL_REG}:${BUILD_ID}
                '''
           }
         }
