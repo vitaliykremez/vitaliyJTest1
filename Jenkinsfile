@@ -27,7 +27,7 @@ pipeline {
       AWS_ECS_CPU = '256'
       AWS_ECS_MEMORY = '512'
       AWS_ECS_CLUSTER = 'vk-cluster-fargate'
-      AWS_ECS_TASK_DEFINITION_PATH = './aws/container-definition-update-image.json'
+      AWS_ECS_TASK_DEFINITION_PATH = 'aws/container-definition-update-image.json'
     }
 
     stages {
