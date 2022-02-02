@@ -35,9 +35,9 @@ pipeline {
         stage('Build & Test') {
           steps {
             sh '''
+              npm install
               ls -l
               npm run test:ci
-              ls -l
             '''
     			}
         }
