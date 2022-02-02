@@ -61,8 +61,9 @@ pipeline {
           steps {
             script {
               sh '''
-              jq --arg newImage "$NEW_ECR_IMAGE" '.containerDefinitions[0].image = $newImage' aws/container-definition-update-image.json > "tmp" && mv "tmp" aws/container-definition-update-image.json
-              aws ecs register-task-definition  --family vk-v2 --cli-input-json file://aws/container-definition-update-image.json
+                jq --arg newImage "$NEW_ECR_IMAGE" '.containerDefinitions[0].image = $newImage' aws/container-definition-update-image.json > "tmp" && mv "tmp" aws/container-definition-update-image.json
+                aws ecs register-task-definition  --family vk-v2 --cli-input-json file://aws/container-definition-update-image.json
+                aws ecs update-service --cluster ${AWS_ECS_CLUSTER} --service ${AWS_ECS_SERVICE} --force-new-deployment
               '''
             }
           }
