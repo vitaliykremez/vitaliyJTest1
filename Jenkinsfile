@@ -63,7 +63,7 @@ pipeline {
               sh '''
                 jq --arg newImage "$NEW_ECR_IMAGE" '.containerDefinitions[0].image = $newImage' aws/container-definition-update-image.json > "tmp" && mv "tmp" aws/container-definition-update-image.json
                 aws ecs register-task-definition  --family vk-v2 --cli-input-json file://aws/container-definition-update-image.json
-                TASK_REVISION=`aws ecs describe-task-definition --task-definition "${AWS_ECS_TASK_DEFINITION}" | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
+                TASK_REVISION=`aws ecs describe-task-definition --task-definition "${AWS_ECS_TASK_DEFINITION}" | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//' | tr -d ","`
                 aws ecs update-service --cluster ${AWS_ECS_CLUSTER} --service ${AWS_ECS_SERVICE} --task-definition ${AWS_ECS_TASK_DEFINITION}:${TASK_REVISION} --force-new-deployment
               '''
             }
