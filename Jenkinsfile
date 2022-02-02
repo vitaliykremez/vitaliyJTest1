@@ -19,7 +19,7 @@ pipeline {
       THE_BUTLER_SAYS_SO=credentials('jenkins-aws-beanstalk')
 //      POM_VERSION = getVersion()
 //      JAR_NAME = getJarName()
-      AWS_ECS_SERVICE = 'vk-fagate-service'
+      AWS_ECS_SERVICE = 'vk-fargate-service'
       AWS_ECS_TASK_DEFINITION = 'vk-v2'
       AWS_ECS_COMPATIBILITY = 'FARGATE'
       AWS_ECS_EXECUTION_ROL = 'ecsTaskExecutionRole'
@@ -28,6 +28,7 @@ pipeline {
       AWS_ECS_MEMORY = '512'
       AWS_ECS_CLUSTER = 'vk-cluster-fargate'
       AWS_ECS_TASK_DEFINITION_PATH = 'aws/container-definition-update-image.json'
+      NEW_ECR_IMAGE = '216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular:${BUILD_ID}'
     }
 
     stages {
@@ -59,10 +60,10 @@ pipeline {
         stage('Deploy in ECS') {
           steps {
             script {
-        //      updateContainerDefinitionJsonWithImageVersion()
-              sh("/usr/local/bin/aws ecs register-task-definition --region ${AWS_ECR_REGION} --family ${AWS_ECS_TASK_DEFINITION} --execution-role-arn ${AWS_ECS_EXECUTION_ROL} --requires-compatibilities ${AWS_ECS_COMPATIBILITY} --network-mode ${AWS_ECS_NETWORK_MODE} --cpu ${AWS_ECS_CPU} --memory ${AWS_ECS_MEMORY} --container-definitions file://${AWS_ECS_TASK_DEFINITION_PATH}")
-              def taskRevision = sh(script: "/usr/local/bin/aws ecs describe-task-definition --task-definition ${AWS_ECS_TASK_DEFINITION} | egrep \"revision\" | tr \"/\" \" \" | awk '{print \$2}' | sed 's/\"\$//'", returnStdout: true)
-              sh("/usr/local/bin/aws ecs update-service --cluster ${AWS_ECS_CLUSTER} --service ${AWS_ECS_SERVICE} --task-definition ${AWS_ECS_TASK_DEFINITION}:${taskRevision}")
+              sh '''
+              jq --arg newImage "$NEW_ECR_IMAGE" '.containerDefinitions[0].image = $newImage' aws/container-definition-update-image.json > "tmp" && mv "tmp" aws/container-definition-update-image.json
+              aws ecs register-task-definition  --family vk-v2 --cli-input-json file://aws/container-definition-update-image.json
+              '''
             }
           }
         }

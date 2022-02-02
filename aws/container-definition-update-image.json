@@ -1,77 +1,36 @@
 {
-    "ipcMode": null,
-    "executionRoleArn": "arn:aws:iam::216920179355:role/ecsTaskExecutionRole",
-    "containerDefinitions": [
-        {
-            "dnsSearchDomains": null,
-            "environmentFiles": null,
-            "logConfiguration": {
-                "logDriver": "awslogs",
-                "secretOptions": null,
-                "options": {
-                    "awslogs-group": "/ecs/vk-v2",
-                    "awslogs-region": "eu-central-1",
-                    "awslogs-stream-prefix": "ecs"
-                }
-            },
-            "entryPoint": null,
-            "portMappings": [
-                {
-                    "hostPort": 80,
-                    "protocol": "tcp",
-                    "containerPort": 80
-                }
-            ],
-            "command": null,
-            "linuxParameters": null,
-            "cpu": 0,
-            "environment": [],
-            "resourceRequirements": null,
-            "ulimits": null,
-            "dnsServers": null,
-            "mountPoints": [],
-            "workingDirectory": null,
-            "secrets": null,
-            "dockerSecurityOptions": null,
-            "memory": null,
-            "memoryReservation": null,
-            "volumesFrom": [],
-            "stopTimeout": null,
-            "image": "216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular:%BUILD_ID%",
-            "startTimeout": null,
-            "firelensConfiguration": null,
-            "dependsOn": null,
-            "disableNetworking": null,
-            "interactive": null,
-            "healthCheck": null,
-            "essential": true,
-            "links": null,
-            "hostname": null,
-            "extraHosts": null,
-            "pseudoTerminal": null,
-            "user": null,
-            "readonlyRootFilesystem": null,
-            "dockerLabels": null,
-            "systemControls": null,
-            "privileged": null,
-            "name": "taskid-40"
+  "executionRoleArn": "arn:aws:iam::216920179355:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/vk-v2",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
         }
-    ],
-    "memory": "512",
-    "taskRoleArn": "arn:aws:iam::216920179355:role/ecsTaskExecutionRole",
-    "family": "vk-v2",
-    "pidMode": null,
-    "requiresCompatibilities": [
-        "FARGATE"
-    ],
-    "networkMode": "awsvpc",
-    "runtimePlatform": {
-        "operatingSystemFamily": "LINUX",
-        "cpuArchitecture": null
-    },
-    "cpu": "256",
-    "inferenceAccelerators": null,
-    "proxyConfiguration": null,
-    "volumes": [],
-    "tags": []
+      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "cpu": 0,
+      "image": "216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular:123",
+      "name": "test"
+    }
+  ],
+  "memory": "512",
+  "taskRoleArn": "arn:aws:iam::216920179355:role/ecsTaskExecutionRole",
+  "family": "vk-v2",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX"
+  },
+  "cpu": "256"
 }
