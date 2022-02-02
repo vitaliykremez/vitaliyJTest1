@@ -28,7 +28,7 @@ pipeline {
       AWS_ECS_MEMORY = '512'
       AWS_ECS_CLUSTER = 'vk-cluster-fargate'
       AWS_ECS_TASK_DEFINITION_PATH = 'aws/container-definition-update-image.json'
-      NEW_ECR_IMAGE = '216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular:${BUILD_ID}'
+      NEW_ECR_IMAGE = "216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular:${BUILD_ID}"
     }
 
     stages {
