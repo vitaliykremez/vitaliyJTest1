@@ -1,0 +1,36 @@
+{
+  "executionRoleArn": "arn:aws:iam::216920179355:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/vk-v2",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "cpu": 0,
+      "image": "216920179355.dkr.ecr.eu-central-1.amazonaws.com/vk-testangular:123",
+      "name": "test"
+    }
+  ],
+  "memory": "512",
+  "taskRoleArn": "arn:aws:iam::216920179355:role/ecsTaskExecutionRole",
+  "family": "vk-v2",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX"
+  },
+  "cpu": "256"
+}
