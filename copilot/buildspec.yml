@@ -12,10 +12,10 @@ phases:
       - wget https://ecs-cli-v2-release.s3.amazonaws.com/copilot-linux-v1.14.0
       - mv ./copilot-linux-v1.14.0 ./copilot-linux
       - chmod +x ./copilot-linux
-  pre_build:
-    commands:
-      - echo Logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  #pre_build:
+    #commands:
+  #  - echo Logging in to Amazon ECR...
+  #    - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo "Run your tests"
