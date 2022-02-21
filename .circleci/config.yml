@@ -7,4 +7,18 @@ jobs:
       name: node/default
       tag: 14.15.1
     steps:
-      checkout
+    - checkout
+    - node/install-packages:
+        pkg-manager: nmp
+    - run:
+      command: npm build
+      name: test
+    - store_artifacts:
+        path: /tmp/test-results
+        dastination: raw-test-output
+    - store_test_results:
+        parth: /tmp/test-results
+workflows:
+  node-tests:
+    jobs:
+    - test 
